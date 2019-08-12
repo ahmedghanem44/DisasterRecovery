@@ -27,7 +27,7 @@ public class Job implements Serializable {
 	@Column(name="Hourly_rate")
 	private double jobHourlyRate;
 	
-	@Column(name="Max_Hours_Per-Day")
+	@Column(name="Max_Hours_Per_Day")
 	private int jobmaxHours;
 
 	public int getJobId() {
