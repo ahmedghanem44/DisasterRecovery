@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.project.model.Machine;
 import com.project.model.User;
+import com.project.service.MachineService;
 import com.project.service.UserService;
 
 @Component
@@ -14,39 +16,28 @@ public class UserTest implements CommandLineRunner{
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	MachineService machineService;
 	
     @Override
     public void run(String...args) throws Exception {
     	if(args.length > 0)
     	{
-	        User u1 = new User();
-	        u1.setName("phil");
-	        u1.setUsername("philuser");
-	        u1.setIs_admin(false);        
-	        User u2 = new User();
-	        u2.setName("karen");
-	        u2.setUsername("karenuser");
-	        u2.setIs_admin(true);
+    		
+
+    		Machine m = new Machine();
+    		m.setCode("AT-1300");
+    		m.setDescription("something");
+    		m.setHourly_rent(5.55);
+    		m.setMax_hours_per_day(7.5);
 	        
-	        userService.add(u1);
-	        userService.add(u2);
-	        
-	        List<User> userlist = userService.getUsers();
-	        for(User u : userlist)
-	        	System.out.println(u);
-	        
-	        User u3 = userService.getUserById(userlist.get(0).getId());
-	        u3.setName("pete");
-	        u3.setUsername("peteuser");
-	        
-	        userService.add(u3);
-	        
-	        userlist = userService.getUsers();
-	        for(User u : userlist)
-	        {
-	        	System.out.println(u);
-	        	userService.delete(u.getId());
-	        }
+    		machineService.add(m);
+    		
+    		List<Machine> mlist = machineService.getMachines();
+    		
+    		for (Machine mach: mlist)
+    			System.out.println(mach);
+    		machineService.delete(m.getId());
     	}
     }
 }
