@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.project.dao.UserDAO;
+import com.project.model.Machine;
 import com.project.model.User;
 
 @Component
@@ -24,8 +25,7 @@ public class UserService {
         return (List<User>) repository.findAll();
     }
     public User getUserById(long id) {
-        Optional<User> optionalUser = repository.findById(id);
-        return optionalUser.orElseThrow();
+    	return (User) repository.findById(id).orElse(new User());
     }
 
 }

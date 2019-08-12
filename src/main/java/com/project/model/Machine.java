@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,10 +15,6 @@ public class Machine implements Serializable {
 
 	private static final long serialVersionUID = 3109160088878846764L;
 
-    @ManyToOne
-    @JoinColumn(name="timesheet_id", nullable=true)
-	private Timesheet timesheet;
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id")
@@ -51,14 +45,6 @@ public class Machine implements Serializable {
 				"\nmax hours per day: " + max_hours_per_day;
 	}
 	
-	
-	public Timesheet getTimesheet() {
-		return timesheet;
-	}
-
-	public void setTimesheet(Timesheet timesheet) {
-		this.timesheet = timesheet;
-	}
 
 	public Long getId() {
 		return id;

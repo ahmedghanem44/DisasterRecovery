@@ -1,7 +1,6 @@
 package com.project.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,8 +23,7 @@ public class TimesheetService {
         return (List<Timesheet>) repository.findAll();
     }
     public Timesheet getTimesheetById(long id) {
-        Optional<Timesheet> optionalTimesheet = repository.findById(id);
-        return optionalTimesheet.orElseThrow();
+    	return (Timesheet) repository.findById(id).orElse(new Timesheet());
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.project.model.Machine;
+import com.project.model.MachineUse;
 import com.project.model.Timesheet;
 import com.project.service.MachineService;
 import com.project.service.TimesheetService;
@@ -46,22 +47,26 @@ public class UserTest implements CommandLineRunner{
     		timesheet.setDate("9/22/19");
     		timesheet.setSite_code("gg-22");
     		
-    		m.setTimesheet(timesheet);
-    		m2.setTimesheet(timesheet);
     		
     		machineService.add(m);
     		machineService.add(m2);
+    		
+    		MachineUse machineuse = new MachineUse();
+    		machineuse.setHours_used(4.0);
+    		machineuse.setMachine(m);
+    		
+    		timesheet.addMachineUse(machineuse);
     		
     		timesheetService.add(timesheet);
     		
     		Timesheet t = timesheetService.getTimesheetById(timesheet.getId());
     		
-    		Set<Machine> tm = t.getMachines();
+    		Set<MachineUse> mulist = t.getMachineuses();
     		
     		System.out.println(t);
     		
-    		for (Machine mach : tm)
-    			System.out.println(mach);
+    		for (MachineUse mu : mulist)
+    			System.out.println(mu);
     		
     		
     	}

@@ -24,8 +24,7 @@ public class MachineService {
         return (List<Machine>) repository.findAll();
     }
     public Machine getMachineById(long id) {
-        Optional<Machine> optionalMachine = repository.findById(id);
-        return optionalMachine.orElseThrow();
+    	return (Machine) repository.findById(id).orElse(new Machine());
     }
 
 }

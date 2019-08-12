@@ -20,12 +20,12 @@ public class Timesheet implements Serializable {
 	private static final long serialVersionUID = -6529528701780212425L;
 
 	@OneToMany(mappedBy="timesheet")
-    private Set<Machine> machines;
+    private Set<MachineUse> machineuses;
 	
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id ")
+	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "date")
@@ -41,7 +41,7 @@ public class Timesheet implements Serializable {
 	
 	public Timesheet()
 	{
-		machines = new HashSet<Machine>();
+		machineuses = new HashSet<MachineUse>();
 	}	
 	
 	@Override
@@ -50,21 +50,23 @@ public class Timesheet implements Serializable {
 		return	"date : " + date + 
 				"\nsite code : " + site_code +
 				"\ncontractor name: " + contractor_name +
-				"\nnum machines: " + machines.size();
+				"\nnum machines: " + machineuses.size();
 	}
 
 	
-	public Set<Machine> getMachines() {
-		return machines;
-	}
-	
-	public void setMachines(Set<Machine> machines)
-	{
-		this.machines = machines;
+
+
+	public Set<MachineUse> getMachineuses() {
+		return machineuses;
 	}
 
-	public void addMachine(Machine machine) {
-		machines.add(machine);
+	public void setMachineuses(Set<MachineUse> machineuses) {
+		this.machineuses = machineuses;
+	}
+
+	public void addMachineUse(MachineUse machineuse) {
+		machineuse.setTimesheet(this);
+		machineuses.add(machineuse);
 	}
 
 	public Long getId() {
