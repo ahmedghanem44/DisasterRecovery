@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,8 +20,8 @@ public class Timesheet implements Serializable {
 
 	private static final long serialVersionUID = -6529528701780212425L;
 
-	@OneToMany(mappedBy="timesheet")
-    private Set<MachineUse> machineuses;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="timesheet")
+    private Set<MachineUse> machineuses = new HashSet<MachineUse>();
 	
 
 	@Id
@@ -41,7 +42,6 @@ public class Timesheet implements Serializable {
 	
 	public Timesheet()
 	{
-		machineuses = new HashSet<MachineUse>();
 	}	
 	
 	@Override

@@ -1,12 +1,17 @@
 package com.project.test;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.project.model.Job;
+import com.project.model.Machine;
+import com.project.model.MachineUse;
+import com.project.model.Timesheet;
 import com.project.service.JobService;
 import com.project.service.MachineService;
+import com.project.service.MachineUseService;
 import com.project.service.TimesheetService;
 import com.project.service.UserService;
 
@@ -16,7 +21,9 @@ public class UserTest implements CommandLineRunner {
 	@Autowired
 	UserService userService;
 	@Autowired
-	MachineService machineService;
+	MachineService machineService;	
+	@Autowired
+	MachineUseService machineUseService;
 	@Autowired
 	TimesheetService timesheetService;
 	@Autowired
@@ -25,13 +32,11 @@ public class UserTest implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		if (args.length > 0) {
+		if (args.length == 1) {
 
-			Job job = new Job();
+
 			
-	
-			
-			
+			/*
 			
 			  Machine m = new Machine(); 
 			  m.setCode("AT-1300");
@@ -51,15 +56,21 @@ public class UserTest implements CommandLineRunner {
 			  timesheet.setSite_code("gg-22");
 			  
 			  
-			  machineService.add(m); machineService.add(m2);
+			  machineService.add(m); 
+			  machineService.add(m2);
 			  
 			  MachineUse machineuse = new MachineUse(); 
 			  machineuse.setHours_used(4.0);
 			  machineuse.setMachine(m);
+			  machineuse.setTimesheet(timesheet);
 			  
 			  timesheet.addMachineUse(machineuse);
 			  
 			  timesheetService.add(timesheet);
+			  
+			  machineUseService.add(machineuse);
+			  
+			  
 			  
 			  Timesheet t = timesheetService.getTimesheetById(timesheet.getId());
 			  
@@ -68,7 +79,7 @@ public class UserTest implements CommandLineRunner {
 			  System.out.println(t);
 			  
 			  for (MachineUse mu : mulist) System.out.println(mu);
-			 
+			 */
 
 		}
 	}
