@@ -1,35 +1,37 @@
 package com.project.test;
 
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.project.model.Machine;
-import com.project.model.MachineUse;
-import com.project.model.Timesheet;
+import com.project.model.Job;
+import com.project.service.JobService;
 import com.project.service.MachineService;
 import com.project.service.TimesheetService;
 import com.project.service.UserService;
 
 @Component
-public class UserTest implements CommandLineRunner{
+public class UserTest implements CommandLineRunner {
 
 	@Autowired
 	UserService userService;
 	@Autowired
-	MachineService machineService;	
+	MachineService machineService;
 	@Autowired
 	TimesheetService timesheetService;
-	
-	
-    @Override
-    public void run(String...args) throws Exception {
-    	if(args.length > 0)
-    	{
-    		
+	@Autowired
+	JobService jobService;
 
+
+	@Override
+	public void run(String... args) throws Exception {
+		if (args.length > 0) {
+
+			Job job = new Job();
+			
+	
+			
+			
 			/*
 			 * Machine m = new Machine(); m.setCode("AT-1300");
 			 * m.setDescription("something"); m.setHourly_rent(5.55);
@@ -60,8 +62,7 @@ public class UserTest implements CommandLineRunner{
 			 * 
 			 * for (MachineUse mu : mulist) System.out.println(mu);
 			 */
-    		
-    		
-    	}
-    }
+
+		}
+	}
 }
