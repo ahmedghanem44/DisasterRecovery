@@ -6,12 +6,13 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.project.dao.TimesheetDAO;
 import com.project.model.JobHours;
 import com.project.model.Timesheet;
 
-@Component
+@Service
 public class TimesheetService {
 	
     @Autowired TimesheetDAO repository;
@@ -32,7 +33,7 @@ public class TimesheetService {
     // added by Nemo
     
     // To get the total hours worked by all labors in one timesheet
-    public double getTotalHours(int id) {
+    public double getTotalHours(long id) {
     	double hours = 0 ;
     	Timesheet ts = new Timesheet();
     	ts = getTimesheetById(id);
@@ -48,7 +49,7 @@ public class TimesheetService {
     
     // To get the total amount by multiplying hours worked by the labor hourly rate for all the labors
     // in one timesheet 
-    public double getTotalAmount(int id) {
+    public double getTotalAmount(long id) {
     	double hours = 0 ;
     	double amount = 0 ;
     	Timesheet ts = new Timesheet();
@@ -65,7 +66,7 @@ public class TimesheetService {
     }
     
     // To finalize and approve the timesheet ad set isOpen status to false
-    public void approveTimeSheet(int id) {
+    public void approveTimeSheet(long id) {
     	Timesheet ts = new Timesheet();
     	ts = getTimesheetById(id);
     	ts.setOpen(false);

@@ -13,10 +13,10 @@ public interface UserDAO extends CrudRepository<User, Long> {
 	
 	 // To determine whether the user is an admin or non-admin user to redirect him/her to the 
     // dedicated page
-	public boolean isAdmin(long id);
+//	public boolean isAdmin(long id);
 	
 	// To check if the username and password match the database and authorize login
-    public boolean isAuthorized(String username,String password);
+//    public boolean isAuthorized(String username,String password);
 	
 	// end of change
 
