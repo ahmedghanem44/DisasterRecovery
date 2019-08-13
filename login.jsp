@@ -21,5 +21,8 @@
 		</table>
 		<input type="submit" value="Login" /></form>
 </body>
+
+<a href="jobList.html"> job list</a>
+
 <footer>Goes with java loginController</footer>
 </html>
