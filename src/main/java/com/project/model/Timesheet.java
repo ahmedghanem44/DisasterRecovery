@@ -23,6 +23,19 @@ public class Timesheet implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="timesheet")
     private Set<MachineUse> machineuses = new HashSet<MachineUse>();
 	
+	// added by Nemo
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="timesheet")
+    private Set<JobHours> jobHours = new HashSet<JobHours>();
+	
+
+	public Set<JobHours> getJobHours() {
+		return jobHours;
+	}
+
+	public void setJobHours(Set<JobHours> jobHours) {
+		this.jobHours = jobHours;
+	}
+	// end of change
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -38,11 +51,27 @@ public class Timesheet implements Serializable {
 	@Column(name = "contractor_name")
 	private String contractor_name;
 	
+	// added by Nemo
+	
+	// Status of a timesheet to show if its either approved or not yet
+	@Column (name="is_Open")
+	private boolean isOpen;
+	
 
 	
+	public boolean isOpen() {
+		return isOpen;
+	}
+
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
+	}
+
 	public Timesheet()
 	{
 	}	
+	
+	// end of change
 	
 	@Override
 	public String toString() 

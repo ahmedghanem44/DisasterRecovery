@@ -1,11 +1,14 @@
 package com.project.service;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.project.dao.TimesheetDAO;
+import com.project.model.JobHours;
 import com.project.model.Timesheet;
 
 @Component
@@ -25,5 +28,51 @@ public class TimesheetService {
     public Timesheet getTimesheetById(long id) {
     	return (Timesheet) repository.findById(id).orElse(new Timesheet());
     }
+    
+    // added by Nemo
+    
+    // To get the total hours worked by all labors in one timesheet
+    public double getTotalHours(int id) {
+    	double hours = 0 ;
+    	Timesheet ts = new Timesheet();
+    	ts = getTimesheetById(id);
+    	Set<JobHours> jh = ts.getJobHours();
+    	Iterator<JobHours> itr = jh.iterator();
+    	while (itr.hasNext()) {
+    		double h = itr.next().getHours_worked();
+    		hours += h ;
+    	}
+    	return hours;
+    	
+    }
+    
+    // To get the total amount by multiplying hours worked by the labor hourly rate for all the labors
+    // in one timesheet 
+    public double getTotalAmount(int id) {
+    	double hours = 0 ;
+    	double amount = 0 ;
+    	Timesheet ts = new Timesheet();
+    	ts = getTimesheetById(id);
+    	Set<JobHours> jh = ts.getJobHours();
+    	Iterator<JobHours> itr = jh.iterator();
+    	while (itr.hasNext()) {
+    		double h = itr.next().getHours_worked();
+    		double hourlyRate = itr.next().getJob().getJobHourlyRate();
+    		amount += (h * hourlyRate);
+    	}
+    	return amount;
+    	
+    }
+    
+    // To finalize and approve the timesheet ad set isOpen status to false
+    public void approveTimeSheet(int id) {
+    	Timesheet ts = new Timesheet();
+    	ts = getTimesheetById(id);
+    	ts.setOpen(false);
+    }
+    
+    // end of change
+    
+    
 
 }
