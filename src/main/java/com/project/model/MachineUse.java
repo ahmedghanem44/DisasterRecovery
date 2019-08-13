@@ -15,9 +15,6 @@ import javax.persistence.Table;
 @Table(name="MachineUses")
 public class MachineUse implements Serializable {
 
-	
-
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id")

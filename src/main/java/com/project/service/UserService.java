@@ -27,5 +27,41 @@ public class UserService {
     public User getUserById(long id) {
     	return (User) repository.findById(id).orElse(new User());
     }
+    
+    //added by Nemo
+    
+    // To find user by username while login
+    public User getUserByUsername (String username) {
+    	return (User) repository.findByUsername(username);
+    }
+    
+    
+    // To determine whether the user is an admin or non-admin user to redirect him/her to the 
+    // dedicated page
+    public boolean isAdmin(long id) {
+    	User user = new User();
+    	user = getUserById(id);
+    	
+    	if(user.isIs_admin())
+    		return true;
+    	else
+    		return false;
+    }
+    
+    
+    // To check if the username and password match the database and authorize login
+    public boolean isAuthorized(String username,String password) {
+    	User user = new User();
+    	user = getUserByUsername(username);
+    	if (user != null) {
+    		if (user.getUsername().equals(username) && user.getPassword().equals(password))
+    			return true;
+    		else
+    			return false;   		
+    	}else
+    		return false;
+    }
+    
+    // end of change
 
 }
