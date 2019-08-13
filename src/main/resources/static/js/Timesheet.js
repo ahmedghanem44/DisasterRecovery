@@ -35,17 +35,17 @@ class Timesheet extends React.Component
 	addLaborRow = () =>
 	{
 		
-		this.setState(
+		this.setState({
 		  labor_info: [...this.state.labor_info, {"code":null, "hours":null, "total":null}]
-		}))
+		})
 		console.log("adding a row")
 	}
 	addMachineRow = () =>
 	{
 		
-		this.setState(prevState => ({
-		  labor_info: [...this.state.labor_info, {"code":null, "hours":null, "total":null}]
-		}))
+		this.setState({
+		  machine_info: [...this.state.machine_info, {"code":null, "hours":null, "total":null}]
+		})
 		console.log("adding a row")
 	}
 	
@@ -94,9 +94,10 @@ function TimeSheetRow (tsr, label1, label2)
 	)
 }
 
-		ReactDOM.render(
-		React.createElement(Timesheet),
-		document.getElementById('root')
-		);
+ReactDOM.render(
+React.createElement(Timesheet),
+document.getElementById('root')
+);
+
 
 
