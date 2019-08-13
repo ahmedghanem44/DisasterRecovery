@@ -64,6 +64,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+<<<<<<< HEAD
 		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/javax.servlet.jsp.jstl-api -->
 		<dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>
@@ -79,6 +80,12 @@
         <groupId>jstl</groupId>
         <artifactId>jstl</artifactId>
         <version>1.2</version>
+=======
+			    <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <!--<scope>provided</scope>-->
+>>>>>>> bca802dcf531256f2ed06efd21195bf01a6e9582
     </dependency>
 	</dependencies>
 	<build>
@@ -89,5 +96,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
