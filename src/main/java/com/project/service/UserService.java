@@ -38,9 +38,19 @@ public class UserService {
     
     // To determine whether the user is an admin or non-admin user to redirect him/her to the 
     // dedicated page
-    public boolean isAdmin(long id) {
+    public boolean isAdminById(long id) {
     	User user = new User();
     	user = getUserById(id);
+    	
+    	if(user.isIs_admin())
+    		return true;
+    	else
+    		return false;
+    }
+    
+    public boolean isAdminByUserName(String username) {
+    	User user = new User();
+    	user = getUserByUsername(username);
     	
     	if(user.isIs_admin())
     		return true;
