@@ -1,32 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
+<title>Job Management</title>
 </head>
 <body>
-	<div class="header">
-		<h2>Disaster Recovery Application : Job Management</h2>
-	</div>
-	<div class="column left">
-		<h3>Job Management</h3>
-		<h3>Machine Management</h3>
-		<h3>TimeSheet Management</h3>
-	</div>
-	<div class="column right">
-	<h2 class="title"><u> Job Management</u> </h2>
+	<h1>Job Code Management</h1>
+	<h3>
+		<a href="newJob.html">Add New Job</a>
+	</h3>
+
 	<c:if test="${!empty jobs}">
-		<table>
-			<col width="200">
-			<col width="400">
-			<col width="200">
-			<col width="400">
-			<col width="100">
-			<col width="100">
-			<tr class="select" height="40" >
+		<table align="center" border="1">
+			<tr>
 				<th>Job Code</th>
 				<th>Description</th>
 				<th>Hourly Rate</th>
@@ -36,7 +24,7 @@
 			</tr>
 
 			<c:forEach items="${jobs}" var="job">
-				<tr height="40" bgcolor: #f1f1f1>
+				<tr>
 					<td><c:out value="${job.jobCode}" /></td>
 					<td><c:out value="${job.jobDescription}" /></td>
 					<td><c:out value="${job.jobHourlyRate}" /></td>
@@ -48,6 +36,5 @@
 			</c:forEach>
 		</table>
 	</c:if>
-	</div>
 </body>
 </html>
