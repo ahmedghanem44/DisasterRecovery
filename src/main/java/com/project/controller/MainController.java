@@ -56,6 +56,13 @@ public class MainController {
     	return new ModelAndView("MachineManagementView",mod);
     }
     
+    @RequestMapping(value="/timeSheetList" , method = RequestMethod.GET)
+    public ModelAndView getTimeSheetList() {
+    	Map<String,Object> mod = new HashMap<String,Object>();
+    	mod.put("timesheets", timeService.getTimesheets());
+    	return new ModelAndView("TimeSheetAdmin" , mod);
+    }
+    
     
 
 }
