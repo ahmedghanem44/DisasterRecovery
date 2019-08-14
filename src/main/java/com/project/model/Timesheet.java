@@ -58,7 +58,7 @@ public class Timesheet implements Serializable {
 
 	// Status of a timesheet to show if its either approved or not yet
 	@Column(name = "is_Open")
-	private boolean isOpen = true;
+	private Boolean isOpen = true;
 
 	// added by Nemo
 
@@ -105,12 +105,12 @@ public class Timesheet implements Serializable {
 
 	}
 
-	public boolean isOpen() {
+	public Boolean isOpen() {
 		return isOpen;
 	}
 
-	public void setOpen(boolean isOpen) {
-		this.isOpen = true;
+	public void setOpen(Boolean isOpen) {
+		this.isOpen = isOpen;
 	}
 
 	public Timesheet() {
