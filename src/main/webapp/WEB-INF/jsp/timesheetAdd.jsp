@@ -12,15 +12,56 @@
 		var machine_options_list = ["machine1", "machine2", "machine3"];
 		var labor_options_list = ["job1", "job2", "job3"];
 	</script>
+	<script type="text/javascript" src="js/tabselector.js"></script>
 
 <title></title>
 </head>
 <body>
 
+<body>
+<div id="root">
+	<div id="top_container">
+	</div>
+	<div id="bottom_container">
+		<div id="tabcontainer">
+			<div class="tab">
+				<ul id="tabbar">
+					<li>
+						<button class="tablinks" onclick="openTab(event, 'Tab1')">tab1</button>
+					</li>
+					<li>
+						<button class="tablinks" onclick="openTab(event, 'timesheet_tab')">Timesheet</button>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-<div  id="timesheetRoot">
+		<!-- Tab content -->
+		<div id="contentcontainer">
+		
+		
+		
+			<div id="Tab1" class="tabcontent">
+				<div>
+					<div>
+						<p>Hi</p>
+					</div>
+				</div>
+			</div>
 
+
+
+
+			<div id="timesheet_tab" class="tabcontent">
+				<div id="timesheetRoot"></div>
+			</div>
+			
+			
+			
+		</div>
+	</div>
 </div>
+
 
 <script type="text/babel" src="js/Timesheet.js" crossorigin></script>
 </body>

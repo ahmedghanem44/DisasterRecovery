@@ -22,9 +22,9 @@ class Timesheet extends React.Component
 		let machine_rows_to_render = this.state.machine_info.map((elem) => 
 			TimeSheetRow(elem, "Machine Code: ", "Hours Used: ", this.props.machine_opt));
 		return(
-			<div style={{padding:"30px", display:"block"}}>
+			<div style={{padding:"0px", margin:"0px", display:"block"}}>
 				<div id="labor_input_container" style={{boxSizing:"border-box", backgroundColor:"#EEEEEE", 
-					borderStyle:"solid", borderColor:"#AAAAAA", margin:"20px", padding:"10px"}}>
+					borderStyle:"solid", borderColor:"#AAAAAA", margin:"0px", padding:"0px"}}>
 					<p style={{fontSize:"20px"}}>Labor Entry</p>
 					<ul style={{listStyleType:"none", margin:"5px"}}>
 						{labor_rows_to_render}
@@ -32,7 +32,7 @@ class Timesheet extends React.Component
 					<button style={{position:"static"}} onClick={this.addLaborRow}>Add More</button>		
 				</div>	
 				<div id="machine_input_container" style={{boxSizing:"border-box", backgroundColor:"#EEEEEE", 
-					borderStyle:"solid", borderColor:"#AAAAAA", margin:"20px", padding:"10px"}}>
+					borderStyle:"solid", borderColor:"#AAAAAA", marginTop:"20px", padding:"0px"}}>
 					<p style={{fontSize:"20px"}}>Machine Entry</p>
 					<ul style={{listStyleType:"none", margin:"5px"}}>
 						{machine_rows_to_render}
