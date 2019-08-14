@@ -76,7 +76,7 @@ public class TimesheetService {
     public void approveTimeSheet(long id) {
     	Timesheet ts = new Timesheet();
     	ts = getTimesheetById(id);
-    	ts.setOpen(false);
+    	ts.setIsOpen(false);
     }
     
     // end of change

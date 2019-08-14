@@ -117,6 +117,16 @@ public class Timesheet implements Serializable {
 
 	}
 
+<<<<<<< HEAD
+=======
+	public Boolean getIsOpen() {
+		return isOpen;
+	}
+
+	public void setIsOpen(Boolean isOpen) {
+		this.isOpen = isOpen;
+	}
+>>>>>>> 52b0248a1b9976347b9b6e7e0516c12227be49e0
 
 	public Timesheet() {
 	}
