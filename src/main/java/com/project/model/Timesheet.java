@@ -56,6 +56,10 @@ public class Timesheet implements Serializable {
 	@Column(name = "total_amount")
 	private double totalAmount;
 
+	// Status of a timesheet to show if its either approved or not yet
+	@Column(name = "is_Open")
+	private boolean isOpen = true;
+
 	// added by Nemo
 
 	public double getTotalHours() {
@@ -88,7 +92,7 @@ public class Timesheet implements Serializable {
 
 	public void setTotalAmount() {
 		double hours = 0;
-		double hourlyRate = 0 ;
+		double hourlyRate = 0;
 		double amount = 0;
 		Iterator<JobHours> itr = this.jobHours.iterator();
 		while (itr.hasNext()) {
@@ -96,20 +100,17 @@ public class Timesheet implements Serializable {
 			hourlyRate = itr.next().getJob().getJobHourlyRate();
 			amount += (hours * hourlyRate);
 		}
-		this.setTotalAmount(amount);;
+		this.setTotalAmount(amount);
+		;
 
 	}
-
-	// Status of a timesheet to show if its either approved or not yet
-	@Column(name = "is_Open")
-	private boolean isOpen;
 
 	public boolean isOpen() {
 		return isOpen;
 	}
 
 	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
+		this.isOpen = true;
 	}
 
 	public Timesheet() {

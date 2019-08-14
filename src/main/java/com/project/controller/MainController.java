@@ -66,7 +66,7 @@ public class MainController {
     public ModelAndView getTimeSheetList() {
     	Map<String,Object> mod = new HashMap<String,Object>();
     	mod.put("timesheets", timeService.getTimesheets());
-    	return new ModelAndView("TimeSheetAdmin" , mod);
+    	return new ModelAndView("timesheetAdd" , mod);
     }
     
     @RequestMapping(value="/login" , method = RequestMethod.POST)
@@ -81,7 +81,7 @@ public class MainController {
     		else 
     			return new ModelAndView("TimeSheetView",mod);
     	}else
-    		return new ModelAndView("Error");
+    		return new ModelAndView("error");
     }
     
     @RequestMapping(value="/logout",method = RequestMethod.GET)
@@ -97,11 +97,11 @@ public class MainController {
     	return "redirect:/joblist.html";
     }
     
-    @RequestMapping(value="/deleteJob" , method = RequestMethod.POST)
-    public String deleteJob(@ModelAttribute("command")  , BindingResult result) {
-    	jobService.removeJob();
-    	return "redirect:/joblist.html";
-    }
+//    @RequestMapping(value="/deleteJob" , method = RequestMethod.POST)
+//    public String deleteJob(@ModelAttribute("command")  , BindingResult result) {
+//    	jobService.removeJob();
+//    	return "redirect:/joblist.html";
+//    }
     
     
     
