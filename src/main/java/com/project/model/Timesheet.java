@@ -70,14 +70,6 @@ public class Timesheet implements Serializable {
 		return totalHours;
 	}
 
-	public boolean isOpen() {
-		return isOpen;
-	}
-
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
-	}
-
 	public void setTotalHours(double totalHours) {
 		this.totalHours = totalHours;
 	}
@@ -117,8 +109,7 @@ public class Timesheet implements Serializable {
 
 	}
 
-<<<<<<< HEAD
-=======
+
 	public Boolean getIsOpen() {
 		return isOpen;
 	}
@@ -126,7 +117,7 @@ public class Timesheet implements Serializable {
 	public void setIsOpen(Boolean isOpen) {
 		this.isOpen = isOpen;
 	}
->>>>>>> 52b0248a1b9976347b9b6e7e0516c12227be49e0
+
 
 	public Timesheet() {
 	}
