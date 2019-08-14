@@ -105,11 +105,11 @@ public class Timesheet implements Serializable {
 
 	}
 
-	public Boolean isOpen() {
+	public Boolean getIsOpen() {
 		return isOpen;
 	}
 
-	public void setOpen(Boolean isOpen) {
+	public void setIsOpen(Boolean isOpen) {
 		this.isOpen = isOpen;
 	}
 
