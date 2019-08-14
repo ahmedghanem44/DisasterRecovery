@@ -32,38 +32,45 @@ public class TimesheetService {
     
     // added by Nemo
     
+    
+    // THE METHOD BELOW HAS BEEN MOVED TO THE TIMESHEET ENTITY TO SET THE NEW TOTALHOURS PROPERTY 
+    //  >>>>>>>>>>>
+    
     // To get the total hours worked by all labors in one timesheet
-    public double getTotalHours(long id) {
-    	double hours = 0 ;
-    	Timesheet ts = new Timesheet();
-    	ts = getTimesheetById(id);
-    	Set<JobHours> jh = ts.getJobHours();
-    	Iterator<JobHours> itr = jh.iterator();
-    	while (itr.hasNext()) {
-    		double h = itr.next().getHours_worked();
-    		hours += h ;
-    	}
-    	return hours;
-    	
-    }
+//    public double getTotalHours(long id) {
+//    	double hours = 0 ;
+//    	Timesheet ts = new Timesheet();
+//    	ts = getTimesheetById(id);
+//    	Set<JobHours> jh = ts.getJobHours();
+//    	Iterator<JobHours> itr = jh.iterator();
+//    	while (itr.hasNext()) {
+//    		double h = itr.next().getHours_worked();
+//    		hours += h ;
+//    	}
+//    	return hours;
+//    	
+//    }
+    
+	 // THE METHOD BELOW HAS BEEN MOVED TO THE TIMESHEET ENTITY TO SET THE NEW TOTALHOURS PROPERTY 
+	 //	>>>>>>>>>>>
     
     // To get the total amount by multiplying hours worked by the labor hourly rate for all the labors
     // in one timesheet 
-    public double getTotalAmount(long id) {
-    	double hours = 0 ;
-    	double amount = 0 ;
-    	Timesheet ts = new Timesheet();
-    	ts = getTimesheetById(id);
-    	Set<JobHours> jh = ts.getJobHours();
-    	Iterator<JobHours> itr = jh.iterator();
-    	while (itr.hasNext()) {
-    		double h = itr.next().getHours_worked();
-    		double hourlyRate = itr.next().getJob().getJobHourlyRate();
-    		amount += (h * hourlyRate);
-    	}
-    	return amount;
-    	
-    }
+//    public double getTotalAmount(long id) {
+//    	double hours = 0 ;
+//    	double amount = 0 ;
+//    	Timesheet ts = new Timesheet();
+//    	ts = getTimesheetById(id);
+//    	Set<JobHours> jh = ts.getJobHours();
+//    	Iterator<JobHours> itr = jh.iterator();
+//    	while (itr.hasNext()) {
+//    		double h = itr.next().getHours_worked();
+//    		double hourlyRate = itr.next().getJob().getJobHourlyRate();
+//    		amount += (h * hourlyRate);
+//    	}
+//    	return amount;
+//    	
+//    }
     
     // To finalize and approve the timesheet ad set isOpen status to false
     public void approveTimeSheet(long id) {

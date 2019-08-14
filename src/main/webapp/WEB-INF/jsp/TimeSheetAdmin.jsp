@@ -17,18 +17,21 @@
 			<th>Description</th>
 			<th>Hourly Rent</th>
 			<th>Max Hours Per Day</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<th>Review</th>
 		</tr>
 
 		<c:forEach items="${timesheets}" var="timesheet">
 			<tr>
 				<td><c:out value="${timesheet.site_code}"/></td>
 				<td><c:out value="${timesheet.contractor_name}"/></td>
-				<td><c:out value="${timesheet.hourly_rent}"/></td>
-				<td><c:out value="${timesheet.max_hours_per_day}"/></td>
-				<td align="center"><a href="edit.html?id=${timesheet.id}">Edit</a> </td>
-				<td align="center"><a href="delete.html?id=${timesheet.id}">Delete</a></td>
+				<td><c:out value="${timesheet.totalHours}"/></td>
+				<td><c:out value="${timesheet.totalAmount}"/></td>
+				<td align="center">
+				<c:choose>
+				<c:when test="${timesheet.isOpen == true}"><a href="review.html?id=${timesheet.id}">Review</a> </c:when>
+				<c:otherwise> Finalized </c:otherwise>
+				</c:choose>
+				 </td>
 			</tr>
 		</c:forEach>
 	</table>
