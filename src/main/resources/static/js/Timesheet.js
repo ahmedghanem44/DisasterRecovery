@@ -1,5 +1,6 @@
 
 
+
 class Timesheet extends React.Component
 {
 	constructor(props)
@@ -11,23 +12,34 @@ class Timesheet extends React.Component
 	componentDidMount()
 	{
 		this.addLaborRow();
+		this.addMachineRow();
 	}
 	
 	render()
 	{
-		let labor_rows_to_render = this.state.labor_info.map((elem) => TimeSheetRow(elem, "Machine Code: ", "Hours Worked: "));
+		let labor_rows_to_render = this.state.labor_info.map((elem) => 
+			TimeSheetRow(elem, "Labor Code: ", "Hours Worked: ", this.props.labor_opt));
+		let machine_rows_to_render = this.state.machine_info.map((elem) => 
+			TimeSheetRow(elem, "Machine Code: ", "Hours Used: ", this.props.machine_opt));
 		return(
-			<div style={{padding:"30px"}}>
+			<div style={{padding:"30px", display:"block"}}>
 				<div id="labor_input_container" style={{boxSizing:"border-box", backgroundColor:"#EEEEEE", 
-					borderStyle:"solid", borderColor:"#AAAAAA", margin:"20px"}}>
-					<p style={{fontSize:"20px", padding:"10px"}}>Labor Entry</p>
-					<ul style={{listStyleType:"none"}}>
+					borderStyle:"solid", borderColor:"#AAAAAA", margin:"20px", padding:"10px"}}>
+					<p style={{fontSize:"20px"}}>Labor Entry</p>
+					<ul style={{listStyleType:"none", margin:"5px"}}>
 						{labor_rows_to_render}
 					</ul>
-					<button style={{position:"absolute", right:"30px", margin:"20px"}} onClick={this.addLaborRow}>Add a Row</button>
-							
+					<button style={{position:"static"}} onClick={this.addLaborRow}>Add More</button>		
 				</div>	
-				<button style={{margin:"30px", position:"relative", left:"20px"}} onClick={this.handleSubmit}>Submit</button>
+				<div id="machine_input_container" style={{boxSizing:"border-box", backgroundColor:"#EEEEEE", 
+					borderStyle:"solid", borderColor:"#AAAAAA", margin:"20px", padding:"10px"}}>
+					<p style={{fontSize:"20px"}}>Machine Entry</p>
+					<ul style={{listStyleType:"none", margin:"5px"}}>
+						{machine_rows_to_render}
+					</ul>
+					<button style={{position:"static"}} onClick={this.addMachineRow}>Add More</button>	
+				</div>	
+				<button style={{position:"relative", left:"20px"}} onClick={this.handleSubmit}>Submit</button>
 			</div>
 		)
 	}
@@ -38,7 +50,7 @@ class Timesheet extends React.Component
 		this.setState({
 		  labor_info: [...this.state.labor_info, {"code":null, "hours":null, "total":null}]
 		})
-		console.log("adding a row")
+		console.log("adding a labor row")
 	}
 	addMachineRow = () =>
 	{
@@ -46,44 +58,60 @@ class Timesheet extends React.Component
 		this.setState({
 		  machine_info: [...this.state.machine_info, {"code":null, "hours":null, "total":null}]
 		})
-		console.log("adding a row")
+		console.log("adding a machine row")
 	}
 	
 	handleSubmit = (e) =>
 	{
 		e.preventDefault();
+		let labor_to_send = [];
 		for(let i=0;i<this.state.labor_info.length;i++)
 		{
-			console.log(this.state.labor_info[i])
+			let elem = this.state.labor_info[i];
+			console.log(elem);
+			if(elem["code"] && elem["hours"] && elem["total"])
+			{
+				labor_to_send.push(elem);
+				console.log("valid");
+			}
 		}
-		
-	}
-	
+		let machines_to_send = [];
+		for(let i=0;i<this.state.machine_info.length;i++)
+		{
+			let elem = this.state.machine_info[i];
+			console.log(elem);
+			if(elem["code"] && elem["hours"] && elem["total"])
+			{
+				machines_to_send.push(elem);
+				console.log("valid");
+			}
+		}
+	}	
 }
 
 
 
-function TimeSheetRow (tsr, label1, label2)
+function TimeSheetRow (tsr, label1, label2, dd_opts)
 {
+	let dd_elements = dd_opts.map((elem) => <option value={elem}>{elem}</option>);
 	return(
 		<React.Fragment>
 		<li>
-			<div style={{padding:"5px", paddingTop:"0px", float:"none"}}>
+			<div style={{padding:"0px", float:"none"}}>
 				<p style={{float:"left"}}>{label1}</p>
-				<select style={{float:"left", padding:"1px"}} onChange={function (event){tsr["code"] = event.target.value;}}>
-					<option value="opt1">opt1</option>
-					<option value="opt2">opt2</option>
-					<option value="opt3">opt3</option>
+				<select style={{float:"left", padding:"1px", marginLeft:"10px", marginRight:"10px"}} onChange={function (event){tsr["code"] = event.target.value;}}>
+					<option value={null}></option>
+					{dd_elements}
 				</select>
-				<form style={{float:"left", marginLeft:"50px", marginRight:"50px"}} onSubmit={function (e){e.preventDefault();}}>
+				<form style={{float:"left"}} onSubmit={function (e){e.preventDefault();}}>
 					{label2}
-					<input style={{paddingRight:"5px"}} type="number" 
+					<input style={{paddingRight:"5px", marginLeft:"10px", marginRight:"10px"}} type="number" 
 					onChange={e => tsr["hours"] = e.target.value}
 					/>
 				</form>
-				<form style={{height:"30px", paddingLeft:"100px"}} onSubmit={function (e){e.preventDefault();}}>
+				<form style={{height:"30px"}} onSubmit={function (e){e.preventDefault();}}>
 					Total:
-					<input type="number" 
+					<input type="number" style={{marginLeft:"10px"}}
 					onChange={e => tsr["total"] = e.target.value}
 					/>
 				</form>
@@ -94,9 +122,12 @@ function TimeSheetRow (tsr, label1, label2)
 	)
 }
 
+
+
+
 ReactDOM.render(
-React.createElement(Timesheet),
-document.getElementById('root')
+	React.createElement(Timesheet, {labor_opt:labor_options_list, machine_opt:machine_options_list}),
+	document.getElementById('timesheetRoot')
 );
 
 
