@@ -24,7 +24,7 @@ class Timesheet extends React.Component
 		let machine_rows_to_render = this.state.machine_info.map((elem) => 
 			TimeSheetRow(elem, "Machine Code: ", "Hours Used: ", this.props.machine_opt));
 		return(
-			<div style={{padding:"0px", margin:"0px", display:"block"}}>
+			<div style={{align:"center", paddingTop:"20px", margin:"0px", display:"block"}}>
 				<div style={{marginBot:"10px", display:"inline-block"}}>
 					<form style={{height:"30px", float:"left"}} onSubmit={function (e){e.preventDefault();}}>
 						Site Code:
@@ -61,7 +61,7 @@ class Timesheet extends React.Component
 					</ul>
 					<button style={{position:"static"}} onClick={this.addMachineRow}>Add More</button>	
 				</div>	
-				<button style={{position:"relative", left:"20px"}} onClick={this.handleSubmit}>Submit</button>
+				<button style={{position:"relative", left:"0px", marginTop:"10px"}} onClick={this.handleSubmit}>Submit</button>
 			</div>
 		)
 	}
