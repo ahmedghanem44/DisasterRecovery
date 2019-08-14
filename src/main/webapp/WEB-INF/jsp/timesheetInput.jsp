@@ -12,8 +12,16 @@
 	crossorigin></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script>
-	var machine_options_list = [ "machine1", "machine2", "machine3" ];
-	var labor_options_list = [ "job1", "job2", "job3" ];
+	var machine_options_list = new Array();
+	var labor_options_list = new Array();
+	let mach = null;
+	<c:forEach items="${machines}" var="machine"> 
+		mach = new Object();
+		mach["name"] =  "${machine.code}";
+		mach["rate"] =  ${machine.hourly_rent};
+		machine_options_list.push(mach);
+	</c:forEach> 
+	
 </script>
 
 <title></title>

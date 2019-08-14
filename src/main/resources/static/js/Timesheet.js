@@ -1,8 +1,5 @@
 
 
-
-
-
 class Timesheet extends React.Component
 {
 	constructor(props)
@@ -20,11 +17,11 @@ class Timesheet extends React.Component
 	render()
 	{
 		let labor_rows_to_render = this.state.labor_info.map((elem) => 
-			TimeSheetRow(elem, "Labor Code: ", "Hours Worked: ", this.props.labor_opt));
+			<TimeSheetRow tsr={elem} label1={"Labor Code: "} label2={"Hours Worked: "} dd_opts={this.props.labor_opt} />);
 		let machine_rows_to_render = this.state.machine_info.map((elem) => 
-			TimeSheetRow(elem, "Machine Code: ", "Hours Used: ", this.props.machine_opt));
+			<TimeSheetRow tsr={elem} label1={"Machine Code: "} label2={"Hours Used: "} dd_opts={this.props.machine_opt} />);
 		return(
-			<div style={{align:"center", paddingTop:"20px", margin:"0px", display:"block"}}>
+			<div style={{padding:"30px", margin:"0px", display:"block"}}>
 				<div style={{marginBot:"10px", display:"inline-block"}}>
 					<form style={{height:"30px", float:"left"}} onSubmit={function (e){e.preventDefault();}}>
 						Site Code:
@@ -83,7 +80,19 @@ class Timesheet extends React.Component
 		console.log("adding a machine row")
 	}
 	
-	handleSubmit = (e) =>
+	handleChangeVal(key, e)
+	{
+		e.preventDefault();
+		if(key === "site_code")
+			this.setState({"site_code":e.target.value})
+		else if(key === "contractor_name")
+			this.setState({"contractor_name":e.target.value})		
+		else if(key === "date")
+			this.setState({"date":e.target.value})
+	
+	}
+	
+	handleSubmit = async (e) =>
 	{
 		e.preventDefault();
 		let labor_to_send = [];
@@ -108,48 +117,95 @@ class Timesheet extends React.Component
 				console.log("valid");
 			}
 		}
+		
+		if(this.state["date"] && this.state["contractor_name"] && this.state["site_code"])
+		{
+		
+			let params_ = {"machines":machines_to_send, "labor":labor_to_send,
+					"date":this.state["date"].toString(),
+					"contractor_name":this.state["contractor_name"],
+					"site_code":this.state["site_code"],
+					}
+			
+			console.log(params_);
+			
+			let response = await fetch("/addTimesheet", 
+					{
+						method: 'POST',
+						headers: {'Content-Type': 'application/json'},
+						body: JSON.stringify(params_)
+						
+					}).catch(error => {
+						return null;
+					});
+		}
+	
+		window.location.href = "/";
 	}	
 	
-	handleChangeVal(key, e)
+}
+
+
+
+class TimeSheetRow extends React.Component
+{
+	constructor(props)
 	{
-		e.preventDefault();
-		this.setState({key:e.target.value})
+		super(props);
+		this.state = {"total":this.props.tsr["total"]};
+	}
+	
+	render()
+	{
+		let tsr = this.props.tsr;
+		let label1 = this.props.label1;
+		let label2 = this.props.label2;
+		let dd_opts = this.props.dd_opts;
+		
+		let dd_elements = dd_opts.map((elem) => <option value={elem["name"]}>{elem["name"]}</option>);
+		return(
+			<React.Fragment>
+			<li>
+				<div style={{padding:"0px", float:"none"}}>
+					<p style={{float:"left"}}>{label1}</p>
+					<select style={{float:"left", padding:"1px", marginLeft:"10px", marginRight:"10px"}} 
+						onChange={(event) =>{tsr["code"] = event.target.value; 
+							this.calcTotal(tsr["code"], tsr["hours"])}}>
+						<option value={null}></option>
+						{dd_elements}
+					</select>
+					<form style={{float:"left"}} onSubmit={function (e){e.preventDefault();}}>
+						{label2}
+						<input style={{paddingRight:"5px", marginLeft:"10px", marginRight:"10px"}} type="number" 
+						onChange={e => {tsr["hours"] = e.target.value; 
+							this.calcTotal(tsr["code"], tsr["hours"])}}
+						/>
+					</form>
+					<form style={{height:"30px"}} onSubmit={function (e){e.preventDefault();}}>
+						Total:
+						<input type="number" value={this.state["total"]} style={{marginLeft:"10px"}}
+						onChange={e => {}}
+						/>
+					</form>
+				</div>
+			</li>
+			
+			</React.Fragment>
+		)
+	}
+	
+	calcTotal = (name, hours) =>
+	{
+		let rate = 0;
+		for(let i=0;i<this.props.dd_opts.length;i++)
+		{
+			if(this.props.dd_opts[i]["name"] == name)
+				rate = this.props.dd_opts[i]["rate"];
+		}
+		this.props.tsr["total"] = hours * rate;
+		this.setState({"total":hours*rate});
 	}
 }
-
-
-
-function TimeSheetRow (tsr, label1, label2, dd_opts)
-{
-	let dd_elements = dd_opts.map((elem) => <option value={elem}>{elem}</option>);
-	return(
-		<React.Fragment>
-		<li>
-			<div style={{padding:"0px", float:"none"}}>
-				<p style={{float:"left"}}>{label1}</p>
-				<select style={{float:"left", padding:"1px", marginLeft:"10px", marginRight:"10px"}} onChange={function (event){tsr["code"] = event.target.value;}}>
-					<option value={null}></option>
-					{dd_elements}
-				</select>
-				<form style={{float:"left"}} onSubmit={function (e){e.preventDefault();}}>
-					{label2}
-					<input style={{paddingRight:"5px", marginLeft:"10px", marginRight:"10px"}} type="number" 
-					onChange={e => tsr["hours"] = e.target.value}
-					/>
-				</form>
-				<form style={{height:"30px"}} onSubmit={function (e){e.preventDefault();}}>
-					Total:
-					<input type="number" style={{marginLeft:"10px"}}
-					onChange={e => tsr["total"] = e.target.value}
-					/>
-				</form>
-			</div>
-		</li>
-		
-		</React.Fragment>
-	)
-}
-
 
 
 

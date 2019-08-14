@@ -44,11 +44,19 @@ public class TImesheetAddController {
 
     @GetMapping("/timesheetAdd")
     public ModelAndView root() {
-        ModelAndView mv = new ModelAndView("timesheetInput");
-        return mv;
+    	Map<String,Object> mod = new HashMap<String,Object>();
+    	mod.put("machines" , machineService.getMachines());
+        return new ModelAndView("timesheetInput", mod);
+
     }
   
-    
+    @GetMapping("/saveTimesheet")
+    public ModelAndView saveTimesheet() {
+    	Map<String,Object> mod = new HashMap<String,Object>();
+    	mod.put("machines" , machineService.getMachines());
+        return new ModelAndView("timesheetInput", mod);
+
+    }
     
 }   
     
