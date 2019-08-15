@@ -107,7 +107,7 @@ class Timesheet extends React.Component
 					});
 				if(found)
 				{
-					elem["hours"] = parseInt(elem["hours"]);
+					elem["hours"] = parseFloat(elem["hours"]).toFixed(2);
 					elem["id"] = found["id"];
 					labor_to_send.push(elem);
 					console.log("valid");
@@ -125,7 +125,7 @@ class Timesheet extends React.Component
 					});
 				if(found)
 				{
-					elem["hours"] = parseInt(elem["hours"]);
+					elem["hours"] = parseFloat(elem["hours"]).toFixed(2);
 					elem["id"] = found["id"];
 					machines_to_send.push(elem);
 					console.log("valid");

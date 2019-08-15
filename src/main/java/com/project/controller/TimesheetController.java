@@ -1,12 +1,15 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +27,7 @@ import com.project.service.TimesheetService;
 import com.project.service.UserService;
 
 @Controller
-public class TimesheetAddController {
+public class TimesheetController {
 	
 
 	@Autowired
@@ -62,18 +65,17 @@ public class TimesheetAddController {
     	timesheet.setSite_code((String)map.get("site_code"));
     	timesheet.setContractor_name((String)map.get("contractor_name"));
     	timesheet.setIsOpen(true);
-
+    	timesheetService.add(timesheet);
     	
     	List<Map<String, Object>> machine_list = (List<Map<String, Object>>)map.get("machines");
     	for(Map<String, Object> mo : machine_list)
     	{
     		Machine m = machineService.getMachineById((int)mo.get("id"));
     		MachineUse mu = new MachineUse();
-    		mu.setHours_used((double)mo.get("hours"));
+    		mu.setHours_used(Double.parseDouble((String)mo.get("hours")));
     		mu.setMachine(m);
     		mu.setTimesheet(timesheet);
     		timesheet.addMachineUse(mu);
-    		timesheetService.add(timesheet);
     		machineUseService.add(mu);
     	}
     	
@@ -82,18 +84,54 @@ public class TimesheetAddController {
     	{
     		Job j = jobService.getJobById((int)jo.get("id"));
     		JobHours jh = new JobHours();
-    		jh.setHours_worked((double)jo.get("hours"));
+    		jh.setHours_worked(Double.parseDouble((String)jo.get("hours")));
     		jh.setJob(j);
     		jh.setTimesheet(timesheet);
     		timesheet.addJobHours(jh);
-    		timesheetService.add(timesheet);
     		jobHours.add(jh);
     	}
-		timesheet.setTotalHours();
-		timesheet.setTotalAmount();
+    	timesheetService.add(timesheet);
+		timesheet.setTotalHours(5.55);
+		timesheet.setTotalAmount(5.77);
 		timesheetService.add(timesheet);
     	
     	return new ModelAndView("adminIndex");
+    }
+    
+    @GetMapping("/timesheetReview/{id}")
+    public ModelAndView timesheetReview(@PathVariable("id") long id) {
+    	
+    	Map<String,Object> mod = new HashMap<String,Object>();
+    	Timesheet timesheet = timesheetService.getTimesheetById(id);
+
+    	List<List<String>> machine_list = new ArrayList<List<String>>();
+    	Set<MachineUse> mulist = timesheet.getMachineuses();
+    	for (MachineUse mu : mulist)
+    	{
+    		List<String> temp = new ArrayList<String>();
+    		temp.add(mu.getMachine().getCode());
+    		temp.add(Double.toString(mu.getHours_used()));
+    		temp.add(Double.toString(mu.getHours_used() * mu.getMachine().getHourly_rent()));
+    		machine_list.add(temp);
+    	}
+    	
+    	List<List<String>> job_list = new ArrayList<List<String>>();
+    	Set<JobHours> jhlist = timesheet.getJobHours();
+    	for (JobHours jh : jhlist)
+    	{
+    		List<String> temp = new ArrayList<String>();
+    		temp.add(jh.getJob().getJobCode());
+    		temp.add(Double.toString(jh.getHours_worked()));
+    		temp.add(Double.toString(jh.getHours_worked() * jh.getJob().getJobHourlyRate()));
+    		job_list.add(temp);
+    	}   	
+    	
+    	mod.put("labors", job_list);
+    	mod.put("machines" , machine_list);
+    	mod.put("timesheet" , timesheet);
+    	
+        return new ModelAndView("timesheetReview", mod);
+
     }
     
 }   

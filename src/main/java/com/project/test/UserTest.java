@@ -1,11 +1,11 @@
 package com.project.test;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.project.model.Job;
-import com.project.model.JobHours;
 import com.project.model.Machine;
 import com.project.model.MachineUse;
 import com.project.model.Timesheet;
@@ -37,12 +37,48 @@ public class UserTest implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		if (args.length == 1) {
 
+			Machine m = machineService.getMachineById(70);
+			System.out.println(m);
+
+	    	Timesheet timesheet = timesheetService.getTimesheetById(1);
+	    	System.out.println(timesheet);
+	    	Set<MachineUse> mulist = timesheet.getMachineuses();
+	    	for (MachineUse mu : mulist)
+	    	{
+	    			System.out.println(mu);
+	    	}
+	    	
+	    	timesheet = timesheetService.getTimesheetById(101);
+	    	System.out.println(timesheet);
+	    	mulist = timesheet.getMachineuses();
+	    	for (MachineUse mu : mulist)
+	    	{
+	    			System.out.println(mu);
+	    	}
+	    	
+	    	timesheet = timesheetService.getTimesheetById(116);
+	    	System.out.println(timesheet);
+	    	mulist = timesheet.getMachineuses();
+	    	for (MachineUse mu : mulist)
+	    	{
+	    			System.out.println(mu);
+	    	}
+	    	
+			/*
 			Timesheet timesheet = timesheetService.getTimesheetById(134);
+			
+			Set<JobHours> jhl = timesheet.getJobHours();
+			Set<MachineUse> mul = timesheet.getMachineuses();
+			for(JobHours j : jhl)
+				System.out.println(j.getId());
+			for(MachineUse m : mul)
+				System.out.println(m);	
+			
 			  timesheet.setTotalHours();
 			  timesheet.setTotalAmount();
 
 			  timesheetService.add(timesheet);
-			
+			*/
 		/*
 			  
 			  Timesheet timesheet = new Timesheet(); 
