@@ -17,6 +17,7 @@
 </script>
 <script type="text/javascript" src="js/tabselector.js"></script>
 
+
 <title></title>
 </head>
 <body>
@@ -28,15 +29,15 @@
 				<div class="tab">
 					<ul id="tabbar">
 						<li>
-							<button class="tablinks" onclick="openTab(event, 'Tab1')">tab1</button>
+							<button class="tablinks" onclick="openTab('Tab1')">tab1</button>
 						</li>
 						<li>
 							<button class="tablinks"
-								onclick="openTab(event, 'timesheet_tab')">Timesheet</button>
+								onclick="openTab('timesheet_tab')">Timesheet</button>
 						</li>
 						<li>
 							<button class="tablinks"
-								onclick="openTab(event, 'timesheet_table')">Timesheet List</button>
+								onclick="openTab('timesheet_table')">Timesheet List</button>
 						</li>
 					</ul>
 				</div>
@@ -105,6 +106,9 @@
 	</div>
 
 
-	<script type="text/babel" src="js/Timesheet.js" crossorigin></script>
+<script> 
+	if(${tab} == "timesheet_tab")
+		openTab("timesheet_table");
+</script>
 </body>
 </html>
