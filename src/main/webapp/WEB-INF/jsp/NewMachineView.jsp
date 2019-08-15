@@ -34,6 +34,12 @@
 			<table>
 				<col width="200">
 				<col width="400">
+				
+				<tr height="40">
+					<td class="select"><form:label path="id">Machine id:</form:label></td>
+					<td><form:input path="id" height="40"
+							value="${machine.id}" readonly="true"/></td>
+				</tr>
 
 				<tr height="40">
 					<td class="select"><form:label path="code">Machine Code:</form:label></td>

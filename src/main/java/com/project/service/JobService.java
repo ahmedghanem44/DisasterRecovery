@@ -15,8 +15,8 @@ public class JobService {
 	@Autowired
 	private JobRepository jobRepo;
 	
-	public Job getJobById(int id) {
-		return (Job) jobRepo.findById(id).orElse(new Job());
+	public Optional<Job> getJobById(int id) {
+		return jobRepo.findById(id);
 	}
 	
 	public void saveJob(Job job) {
@@ -24,11 +24,7 @@ public class JobService {
 	}
 	
 	public void removeJob(int id) {
-//		if(jobRepo.existsById(id)) {
 			jobRepo.deleteById(id);
-//		}else {
-//			
-//		}
 	}
 	
 	public List<Job> getAllJobs(){
