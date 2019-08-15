@@ -23,7 +23,7 @@
 				<div class="tab">
 					<ul id="tabbar">
 						<li>
-							<button class="tablinks" onclick="openTab(event, 'jobs')">Job
+							<button class="tablinks" onclick="openTab('jobs')">Job
 								Management</button>
 						</li>
 						<br>
@@ -31,7 +31,7 @@
 						<br>
 						<br>
 						<li>
-							<button class="tablinks" onclick="openTab(event, 'machines')">Machine
+							<button class="tablinks" onclick="openTab('machines')">Machine
 								Management</button>
 						</li>
 						<br>
@@ -40,7 +40,7 @@
 						<br>
 						<li>
 							<button class="tablinks"
-								onclick="openTab(event, 'timesheet_table')">Timesheet
+								onclick="openTab('timesheet_table')">Timesheet
 								List</button>
 						</li>
 					</ul>

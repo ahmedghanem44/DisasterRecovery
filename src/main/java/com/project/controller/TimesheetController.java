@@ -68,6 +68,9 @@ public class TimesheetController {
     	timesheet.setIsOpen(true);
     	timesheetService.add(timesheet);
     	
+    	double total_hours = 0;
+    	double total_amount = 0;
+    	
     	List<Map<String, Object>> machine_list = (List<Map<String, Object>>)map.get("machines");
     	for(Map<String, Object> mo : machine_list)
     	{
@@ -144,6 +147,18 @@ public class TimesheetController {
     	timesheetService.add(timesheet);
     	
         return new ModelAndView("redirect:/timesheetlist");
+
+    }
+    
+    @GetMapping("/home")
+    public ModelAndView home() {
+    	
+		Map<String, Object> mod = new HashMap<String, Object>();
+		mod.put("timesheets", timesheetService.getTimesheets());
+		mod.put("jobs", jobService.getAllJobs());
+		mod.put("machines", machineService.getMachines());
+		mod.put("tab", "timesheet_table");
+		return new ModelAndView("adminIndex", mod);
 
     }
 
