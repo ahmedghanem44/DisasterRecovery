@@ -12,6 +12,7 @@ class Timesheet extends React.Component
 	{
 		this.addLaborRow();
 		this.addMachineRow();
+		console.log(this.props.machine_opt);
 	}
 	
 	render()
@@ -99,22 +100,36 @@ class Timesheet extends React.Component
 		for(let i=0;i<this.state.labor_info.length;i++)
 		{
 			let elem = this.state.labor_info[i];
-			console.log(elem);
 			if(elem["code"] && elem["hours"] && elem["total"])
 			{
-				labor_to_send.push(elem);
-				console.log("valid");
+				var found = this.props.labor_opt.find(function(element) {
+					  return element["name"] === elem["code"];
+					});
+				if(found)
+				{
+					elem["hours"] = parseInt(elem["hours"]);
+					elem["id"] = found["id"];
+					labor_to_send.push(elem);
+					console.log("valid");
+				}
 			}
 		}
 		let machines_to_send = [];
 		for(let i=0;i<this.state.machine_info.length;i++)
 		{
 			let elem = this.state.machine_info[i];
-			console.log(elem);
 			if(elem["code"] && elem["hours"] && elem["total"])
 			{
-				machines_to_send.push(elem);
-				console.log("valid");
+				var found = this.props.machine_opt.find(function(element) {
+					  return element["name"] === elem["code"];
+					});
+				if(found)
+				{
+					elem["hours"] = parseInt(elem["hours"]);
+					elem["id"] = found["id"];
+					machines_to_send.push(elem);
+					console.log("valid");
+				}
 			}
 		}
 		
@@ -129,7 +144,7 @@ class Timesheet extends React.Component
 			
 			console.log(params_);
 			
-			let response = await fetch("/addTimesheet", 
+			let response = await fetch("/saveTimesheet", 
 					{
 						method: 'POST',
 						headers: {'Content-Type': 'application/json'},
@@ -140,7 +155,7 @@ class Timesheet extends React.Component
 					});
 		}
 	
-		window.location.href = "/";
+		
 	}	
 	
 }

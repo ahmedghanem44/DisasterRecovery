@@ -1,14 +1,15 @@
 package com.project.test;
 
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.project.model.Job;
+import com.project.model.JobHours;
 import com.project.model.Machine;
 import com.project.model.MachineUse;
 import com.project.model.Timesheet;
+import com.project.service.JobHoursService;
 import com.project.service.JobService;
 import com.project.service.MachineService;
 import com.project.service.MachineUseService;
@@ -28,59 +29,63 @@ public class UserTest implements CommandLineRunner {
 	TimesheetService timesheetService;
 	@Autowired
 	JobService jobService;
+	@Autowired
+	JobHoursService jobHoursService;
 
 
 	@Override
 	public void run(String... args) throws Exception {
 		if (args.length == 1) {
 
+			Timesheet timesheet = timesheetService.getTimesheetById(134);
+			  timesheet.setTotalHours();
+			  timesheet.setTotalAmount();
 
+			  timesheetService.add(timesheet);
 			
-			/*
-			
-			  Machine m = new Machine(); 
-			  m.setCode("AT-1300");
-			  m.setDescription("something"); 
-			  m.setHourly_rent(5.55);
-			  m.setMax_hours_per_day(7.5);
-			  
-			  Machine m2 = new Machine(); 
-			  m2.setCode("NJ-90");
-			  m2.setDescription("nothing"); 
-			  m2.setHourly_rent(9.99);
-			  m2.setMax_hours_per_day(2.0);
+		/*
 			  
 			  Timesheet timesheet = new Timesheet(); 
-			  timesheet.setContractor_name("petey");
+			  timesheet.setContractor_name("pablo");
 			  timesheet.setDate("9/22/19"); 
 			  timesheet.setSite_code("gg-22");
 			  
-			  
+			  Machine m = new Machine(); 
+			  m.setCode("AJT-1300");
+			  m.setDescription("something"); 
+			  m.setHourly_rent(5.55);
+			  m.setMax_hours_per_day(7.5);
 			  machineService.add(m); 
-			  machineService.add(m2);
+			  
+			  Job j = new Job();
+			  j.setJobCode("xxx");
+			  j.setJobHourlyRate(5.55);
+			  j.setJobmaxHours(2);
+			  jobService.saveJob(j);
+			  
+			  JobHours jh = new JobHours();
+			  jh.setJob(j);
+			  jh.setTimesheet(timesheet);
+			  jh.setHours_worked(5.2);
+			  
 			  
 			  MachineUse machineuse = new MachineUse(); 
-			  machineuse.setHours_used(4.0);
+			  machineuse.setHours_used(4);
 			  machineuse.setMachine(m);
 			  machineuse.setTimesheet(timesheet);
 			  
+			  timesheet.addJobHours(jh);
 			  timesheet.addMachineUse(machineuse);
-			  
 			  timesheetService.add(timesheet);
 			  
+			  jobHoursService.add(jh);
 			  machineUseService.add(machineuse);
 			  
-			  
-			  
-			  Timesheet t = timesheetService.getTimesheetById(timesheet.getId());
-			  
-			  Set<MachineUse> mulist = t.getMachineuses();
-			  
-			  System.out.println(t);
-			  
-			  for (MachineUse mu : mulist) System.out.println(mu);
-			 */
+			  timesheet.setTotalHours();
+			  timesheet.setTotalAmount();
 
+			  timesheetService.add(timesheet);
+*/
 		}
 	}
 }
