@@ -135,14 +135,18 @@ public class TimesheetController {
 
     }
     
-    @GetMapping("/testtab")
-    public ModelAndView testTabs() {
+    
+    @GetMapping("/timesheetConfirm/{id}")
+    public ModelAndView timesheetConfirm(@PathVariable("id") long id) {
     	
-    	Map<String,Object> mod = new HashMap<String,Object>();
-    	mod.put("tab", "timesheet_table");
-        return new ModelAndView("tabtest", mod);
+    	Timesheet timesheet = timesheetService.getTimesheetById(id);
+    	timesheet.setIsOpen(false);
+    	timesheetService.add(timesheet);
+    	
+        return new ModelAndView("redirect:/timesheetlist");
 
     }
+
     
 }   
     

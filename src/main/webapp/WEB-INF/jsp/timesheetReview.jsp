@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<link href="css/index.css" rel="stylesheet">
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
 </head>
 <body>
 	<p>Date : ${timesheet.date}</p>
@@ -13,7 +14,6 @@
 	<p>Site Code : ${timesheet.site_code}</p>
 	<br>
 	<p>Machine Entries</p>
-	<br>
 	<table border="1">
 		<tr>
 			<th>Machine Code</th>
@@ -32,7 +32,6 @@
 	</table>
 	<br>
 	<p>Labor Entries</p>
-	<br>
 	<table border="1">
 		<tr>
 			<th>Labor Code</th>
@@ -46,9 +45,11 @@
 				</c:forEach>
 			</tr>
 		</c:forEach>
-
-
 	</table>
+	<br>
+      <form action="/timesheetConfirm/${timesheet.id}">
+         <button type="submit">Validate</button>
+      </form>
 
 </body>
 </html>

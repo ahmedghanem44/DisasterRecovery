@@ -13,14 +13,19 @@ body
 p
 {
 	margin: 0;
+	font-family: Calibri;
+	font-weight: 600;
+	font-size: 16px;
+	color: black;
 }
 
-/* *
+*
 {
 	font-family: Calibri;
 	font-weight: 600;
 	font-size: 16px;
-} */
+	color: black;
+} 
 
 .tab {
   overflow: hidden;
