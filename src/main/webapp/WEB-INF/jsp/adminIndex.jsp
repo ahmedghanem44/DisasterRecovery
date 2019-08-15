@@ -176,5 +176,11 @@
 			</div>
 		</div>
 	</div>
+	
+	
+<script> 
+	if("${tab}")
+		openTab("${tab}");
+</script>	
 </body>
 </html>

@@ -135,6 +135,15 @@ public class TimesheetController {
 
     }
     
+    @GetMapping("/testtab")
+    public ModelAndView testTabs() {
+    	
+    	Map<String,Object> mod = new HashMap<String,Object>();
+    	mod.put("tab", "timesheet_table");
+        return new ModelAndView("tabtest", mod);
+
+    }
+    
 }   
     
   
