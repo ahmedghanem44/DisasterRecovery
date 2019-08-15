@@ -128,3 +128,16 @@ p
   text-align: center;
   padding: 20px;
 }
+
+.centerhorizontal
+{
+	position: relative;
+	left:50%;
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+.tablinks
+{
+	width:90%;
+}

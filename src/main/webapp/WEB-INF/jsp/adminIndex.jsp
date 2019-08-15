@@ -23,23 +23,21 @@
 				<div class="tab">
 					<ul id="tabbar">
 						<li>
-							<button class="tablinks" onclick="openTab('jobs')">Job
+							<button class="tablinks centerhorizontal" onclick="openTab('jobs')">Job
 								Management</button>
 						</li>
 						<br>
 						<br>
 						<br>
-						<br>
 						<li>
-							<button class="tablinks" onclick="openTab('machines')">Machine
+							<button class="tablinks centerhorizontal" onclick="openTab('machines')">Machine
 								Management</button>
 						</li>
 						<br>
 						<br>
 						<br>
-						<br>
 						<li>
-							<button class="tablinks"
+							<button class="tablinks centerhorizontal"
 								onclick="openTab('timesheet_table')">Timesheet
 								List</button>
 						</li>
@@ -163,9 +161,9 @@
 									<td><c:out value="${timesheet.totalAmount}" /></td>
 									<td align="center"><c:choose>
 											<c:when test="${timesheet.isOpen == true}">
-												<a href="review.html?id=${timesheet.id}">Review</a>
+												<a href="timesheetReview/${timesheet.id}">Review</a>
 											</c:when>
-											<c:otherwise> Finalized </c:otherwise>
+											<c:otherwise><a href="timesheetReview/${timesheet.id}">Finalized</a></c:otherwise>
 										</c:choose></td>
 								</tr>
 							</c:forEach>
