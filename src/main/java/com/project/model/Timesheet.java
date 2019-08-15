@@ -34,6 +34,10 @@ public class Timesheet implements Serializable {
 	public void setJobHours(Set<JobHours> jobHours) {
 		this.jobHours = jobHours;
 	}
+	public void addJobHours(JobHours jh) {
+		jh.setTimesheet(this);
+		jobHours.add(jh);
+	}
 	// end of change
 
 	@Id
@@ -105,7 +109,7 @@ public class Timesheet implements Serializable {
 			amount += (hours * hourlyRate);
 		}
 		this.setTotalAmount(amount);
-		;
+		
 
 	}
 
