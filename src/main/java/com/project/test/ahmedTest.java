@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.project.model.Job;
+import com.project.model.User;
 import com.project.service.JobService;
 import com.project.service.MachineService;
 import com.project.service.TimesheetService;
@@ -26,14 +27,24 @@ public class ahmedTest implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if (args.length > 0) {
-
-			Job j = new Job();
-			j.setJobCode("Carpenter12");
-			j.setJobDescription("Carpenter Works");
-			j.setJobHourlyRate(45.6);
-			j.setJobmaxHours(8);
+//
+//			Job j = new Job();
+//			j.setJobCode("Carpenter12");
+//			j.setJobDescription("Carpenter Works");
+//			j.setJobHourlyRate(45.6);
+//			j.setJobmaxHours(8);
+//			
+//			js.saveJob(j);
 			
-			js.saveJob(j);
+//			User u = new User();
+//			u.setIs_admin(true);
+//			u.setName("Ahmed");
+//			u.setUsername("ahmed");
+//			u.setPassword("ahmed");
+//			
+//			userService.add(u);
+//			System.out.println(userService.getUserByUsername("john").getId());
+//			System.out.println(userService.isAuthorized("ahmed", "ahmed"));
 	
 			
 			

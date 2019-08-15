@@ -88,12 +88,12 @@
 									<td><c:out value="${timesheet.contractor_name}" /></td>
 									<td><c:out value="${timesheet.totalHours}" /></td>
 									<td><c:out value="${timesheet.totalAmount}" /></td>
-									<%-- <td align="center"><c:choose>
+									<td align="center"><c:choose>
 											<c:when test="${timesheet.isOpen == true}">
 												<a href="review.html?id=${timesheet.id}">Review</a>
 											</c:when>
 											<c:otherwise> Finalized </c:otherwise>
-										</c:choose></td> --%>
+										</c:choose></td>
 								</tr>
 							</c:forEach>
 						</table>
