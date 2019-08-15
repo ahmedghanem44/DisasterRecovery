@@ -123,7 +123,7 @@ public class MainController {
 
 	@RequestMapping(value = "/editmachine.html", method = RequestMethod.GET)
 	public ModelAndView updateMachine(@ModelAttribute("command") Machine machine, BindingResult result) {
-		Machine machineToUpdate = machineService.getMachineById(machine.getId()).get();
+		Machine machineToUpdate = machineService.getMachineById(machine.getId());
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("machine", machineToUpdate);
 		return new ModelAndView("NewMachineView", mod);
@@ -148,7 +148,7 @@ public class MainController {
 	public ModelAndView updateJob(@ModelAttribute("command") Job job, BindingResult result,HttpServletRequest req) {
 		int i = Integer.parseInt(req.getParameter("id"));
 //		System.out.println(job.getJobId());
-		Job jobToUpdate = jobService.getJobById(i).get();
+		Job jobToUpdate = jobService.getJobById(i);
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("job", jobToUpdate);
 		return new ModelAndView("NewJobView", mod);
