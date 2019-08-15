@@ -10,7 +10,7 @@
 
 <title></title>
 </head>
-<body>
+
 <body>
 	<div class="header">
 		<h1 align="center">Disaster Recovery Application</h1>
