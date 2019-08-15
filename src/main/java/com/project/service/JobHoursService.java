@@ -24,7 +24,7 @@ public class JobHoursService {
         return (List<JobHours>) jobHoursRepo.findAll();
     }
     public JobHours getMachineUseById(int id) {
-    	return (JobHours) jobHoursRepo.findById(id).orElse(new JobHours());
+    	return (JobHours) jobHoursRepo.findById(id).orElse(null);
     }
 
 }

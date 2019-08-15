@@ -24,7 +24,7 @@ public class MachineUseService {
         return (List<MachineUse>) repository.findAll();
     }
     public MachineUse getMachineUseById(long id) {
-    	return (MachineUse) repository.findById(id).orElse(new MachineUse());
+    	return (MachineUse) repository.findById(id).orElse(null);
     }
 
 }

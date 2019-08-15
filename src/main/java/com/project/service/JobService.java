@@ -15,8 +15,8 @@ public class JobService {
 	@Autowired
 	private JobRepository jobRepo;
 	
-	public Optional<Job> getJobById(int id) {
-		return jobRepo.findById(id);
+	public Job getJobById(int id) {
+		return jobRepo.findById(id).orElse(null);
 	}
 	
 	public void saveJob(Job job) {

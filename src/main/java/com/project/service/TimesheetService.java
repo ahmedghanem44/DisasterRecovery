@@ -27,7 +27,7 @@ public class TimesheetService {
         return (List<Timesheet>) repository.findAll();
     }
     public Timesheet getTimesheetById(long id) {
-    	return (Timesheet) repository.findById(id).orElse(new Timesheet());
+    	return (Timesheet) repository.findById(id).orElse(null);
     }
     
     // added by Nemo

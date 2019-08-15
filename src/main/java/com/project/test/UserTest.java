@@ -37,32 +37,7 @@ public class UserTest implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		if (args.length == 1) {
 
-			Machine m = machineService.getMachineById(70);
-			System.out.println(m);
-
-	    	Timesheet timesheet = timesheetService.getTimesheetById(1);
-	    	System.out.println(timesheet);
-	    	Set<MachineUse> mulist = timesheet.getMachineuses();
-	    	for (MachineUse mu : mulist)
-	    	{
-	    			System.out.println(mu);
-	    	}
-	    	
-	    	timesheet = timesheetService.getTimesheetById(101);
-	    	System.out.println(timesheet);
-	    	mulist = timesheet.getMachineuses();
-	    	for (MachineUse mu : mulist)
-	    	{
-	    			System.out.println(mu);
-	    	}
-	    	
-	    	timesheet = timesheetService.getTimesheetById(116);
-	    	System.out.println(timesheet);
-	    	mulist = timesheet.getMachineuses();
-	    	for (MachineUse mu : mulist)
-	    	{
-	    			System.out.println(mu);
-	    	}
+			
 	    	
 			/*
 			Timesheet timesheet = timesheetService.getTimesheetById(134);

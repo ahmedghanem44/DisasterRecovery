@@ -26,8 +26,8 @@ public class MachineService {
     public List<Machine> getMachines() {
         return (List<Machine>) repository.findAll();
     }
-    public Optional<Machine> getMachineById(int id) {
-    	return repository.findById(id);
+    public Machine getMachineById(int id) {
+    	return repository.findById(id).orElse(null);
     }
 
 }

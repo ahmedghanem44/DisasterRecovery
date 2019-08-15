@@ -25,7 +25,7 @@ public class UserService {
         return (List<User>) repository.findAll();
     }
     public User getUserById(long id) {
-    	return (User) repository.findById(id).orElse(new User());
+    	return (User) repository.findById(id).orElse(null);
     }
     
     //added by Nemo
