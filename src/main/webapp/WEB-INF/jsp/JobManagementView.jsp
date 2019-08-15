@@ -5,7 +5,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<title>Machine Management</title>
+<title>Job Management</title>
 </head>
 <body>
 	<div class="header">

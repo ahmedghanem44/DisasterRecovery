@@ -6,7 +6,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<title>Add New Machine</title>
+<title>Add New Job</title>
 </head>
 <body>
 	<div class="header">
@@ -34,6 +34,12 @@
 			<table>
 				<col width="200">
 				<col width="400">
+				
+				<tr height="40">
+					<td class="select"><form:label path="jobId">Job id:</form:label></td>
+					<td><form:input path="jobId" height="40"
+							value="${job.jobId}" readonly="true"/></td>
+				</tr>
 
 				<tr height="40">
 					<td class="select"><form:label path="jobCode">Job Code:</form:label></td>

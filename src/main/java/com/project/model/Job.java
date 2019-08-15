@@ -33,6 +33,10 @@ public class Job implements Serializable {
 	public int getJobId() {
 		return jobId;
 	}
+	
+	public Job()
+	{
+	}	
 
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
