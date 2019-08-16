@@ -54,9 +54,17 @@
 		</c:forEach>
 	</table>
 	<br>
-      <form action="/timesheetConfirm/${timesheet.id}">
+      <form id="validate_button" action="/timesheetConfirm/${timesheet.id}">
          <button type="submit">Validate</button>
       </form>
-
+      
+      	<script>
+      		console.log("${uname}")
+      		if("${uname}" != "Administrator")
+      		{
+      			document.getElementById("validate_button").style.visibility="hidden";
+      		}
+      			
+      	</script>
 </body>
 </html>
