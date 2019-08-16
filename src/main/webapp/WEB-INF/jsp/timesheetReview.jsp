@@ -4,7 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="css/index.css" rel="stylesheet">
+	<style>
+	table, th, td {
+	  border: 2px solid black;
+	  border-collapse:collapse;
+	}
+	
+	</style>
+	<link href="/css/index.css" rel="stylesheet">
 	<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
 </head>
@@ -14,7 +21,7 @@
 	<p>Site Code : ${timesheet.site_code}</p>
 	<br>
 	<p>Machine Entries</p>
-	<table border="1">
+	<table>
 		<tr>
 			<th>Machine Code</th>
 			<th>Hours Used</th>
@@ -32,7 +39,7 @@
 	</table>
 	<br>
 	<p>Labor Entries</p>
-	<table border="1">
+	<table>
 		<tr>
 			<th>Labor Code</th>
 			<th>Hours Worked</th>

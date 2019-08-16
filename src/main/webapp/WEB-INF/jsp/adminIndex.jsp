@@ -86,8 +86,7 @@
 						</table>
 					</c:if>
 				</div>
-			</div>
-			<div id="contentcontainer">
+
 
 				<div id="machines" class="column right tabcontent">
 
@@ -127,11 +126,9 @@
 						</table>
 					</c:if>
 				</div>
-			</div>
+			
 
 
-			<!-- Tab content -->
-			<div id="contentcontainer">
 				<div id="timesheet_table" class="column right tabcontent">
 					<h2 class="title">
 						<u> TimeSheet Management</u>
@@ -169,6 +166,7 @@
 							</c:forEach>
 						</table>
 					</c:if>
+				</div>
 				</div>
 
 			</div>

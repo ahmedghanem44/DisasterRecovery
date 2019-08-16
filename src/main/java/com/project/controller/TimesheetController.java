@@ -59,7 +59,7 @@ public class TimesheetController {
     }
   
     @PostMapping("/saveTimesheet")
-    public ModelAndView saveTimesheet(@RequestBody Map<String, Object> map) {
+    public void saveTimesheet(@RequestBody Map<String, Object> map) {
 
     	Timesheet timesheet = new Timesheet();
     	timesheet.setDate((String)map.get("date"));
@@ -74,6 +74,7 @@ public class TimesheetController {
     	List<Map<String, Object>> machine_list = (List<Map<String, Object>>)map.get("machines");
     	for(Map<String, Object> mo : machine_list)
     	{
+    		total_amount -= Double.parseDouble((String)mo.get("total"));
     		Machine m = machineService.getMachineById((int)mo.get("id"));
     		MachineUse mu = new MachineUse();
     		mu.setHours_used(Double.parseDouble((String)mo.get("hours")));
@@ -86,6 +87,8 @@ public class TimesheetController {
     	List<Map<String, Object>> labor_list = (List<Map<String, Object>>)map.get("labor");	
     	for(Map<String, Object> jo : labor_list)
     	{
+    		total_amount += Double.parseDouble((String)jo.get("total"));
+    		total_hours += Double.parseDouble((String)jo.get("hours"));
     		Job j = jobService.getJobById((int)jo.get("id"));
     		JobHours jh = new JobHours();
     		jh.setHours_worked(Double.parseDouble((String)jo.get("hours")));
@@ -95,11 +98,10 @@ public class TimesheetController {
     		jobHours.add(jh);
     	}
     	timesheetService.add(timesheet);
-		timesheet.setTotalHours(5.55);
-		timesheet.setTotalAmount(5.77);
+		timesheet.setTotalHours(total_hours);
+		timesheet.setTotalAmount(total_amount);
 		timesheetService.add(timesheet);
     	
-    	return new ModelAndView("adminIndex");
     }
     
     @GetMapping("/timesheetReview/{id}")
@@ -162,6 +164,14 @@ public class TimesheetController {
 
     }
 
+    @GetMapping("/userhome")
+    public ModelAndView userHome() {
+    	
+		Map<String, Object> mod = new HashMap<String, Object>();
+		mod.put("timesheets", timesheetService.getTimesheets());
+		return new ModelAndView("userIndex", mod);
+
+    }
     
 }   
     

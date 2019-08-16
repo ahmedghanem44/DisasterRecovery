@@ -102,6 +102,7 @@ class Timesheet extends React.Component
 			let elem = this.state.labor_info[i];
 			if(elem["code"] && elem["hours"] && elem["total"])
 			{
+				elem["total"] = elem["total"].toFixed(2);
 				var found = this.props.labor_opt.find(function(element) {
 					  return element["name"] === elem["code"];
 					});
@@ -110,6 +111,7 @@ class Timesheet extends React.Component
 					elem["hours"] = parseFloat(elem["hours"]).toFixed(2);
 					elem["id"] = found["id"];
 					labor_to_send.push(elem);
+					console.log(elem);
 					console.log("valid");
 				}
 			}
@@ -120,6 +122,7 @@ class Timesheet extends React.Component
 			let elem = this.state.machine_info[i];
 			if(elem["code"] && elem["hours"] && elem["total"])
 			{
+				elem["total"] = elem["total"].toFixed(2);
 				var found = this.props.machine_opt.find(function(element) {
 					  return element["name"] === elem["code"];
 					});
@@ -128,6 +131,7 @@ class Timesheet extends React.Component
 					elem["hours"] = parseFloat(elem["hours"]).toFixed(2);
 					elem["id"] = found["id"];
 					machines_to_send.push(elem);
+					console.log(elem);
 					console.log("valid");
 				}
 			}
@@ -153,6 +157,7 @@ class Timesheet extends React.Component
 					}).catch(error => {
 						return null;
 					});
+			window.location = "/userhome";
 		}
 	
 		
