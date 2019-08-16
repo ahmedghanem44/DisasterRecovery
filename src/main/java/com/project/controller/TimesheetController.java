@@ -148,7 +148,7 @@ public class TimesheetController {
     	timesheet.setIsOpen(false);
     	timesheetService.add(timesheet);
     	
-        return new ModelAndView("redirect:/timesheetlist");
+        return new ModelAndView("redirect:/admin");
 
     }
     
