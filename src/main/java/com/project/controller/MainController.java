@@ -79,6 +79,7 @@ public class MainController {
 		mod.put("timesheets", timeService.getTimesheets());
 		mod.put("jobs", jobService.getAllJobs());
 		mod.put("machines", machineService.getMachines());
+		mod.put("tab", "jobs");
 		return new ModelAndView("adminIndex", mod);
 	}
 	
@@ -94,14 +95,18 @@ public class MainController {
 	
 	@RequestMapping(value = "/deletejob.html", method = RequestMethod.GET)
 	public ModelAndView deleteJob(@RequestParam("id") Integer id) {
+		Map<String, Object> mod = new HashMap<String, Object>();
+		mod.put("tab", "jobs");
 		jobService.removeJob(id);
-		return new ModelAndView("redirect:/admin");
+		return new ModelAndView("redirect:/admin",mod);
 	}
 
 	@RequestMapping(value = "/deletemachine.html", method = RequestMethod.GET)
 	public ModelAndView deleteMachine(@RequestParam("id") Integer id) {
+		Map<String, Object> mod = new HashMap<String, Object>();
+		mod.put("tab", "machines");
 		machineService.delete(id);
-		return new ModelAndView("redirect:/admin");
+		return new ModelAndView("redirect:/admin",mod);
 	}
 	
 
@@ -109,6 +114,7 @@ public class MainController {
 	public ModelAndView newMachine(@ModelAttribute("command") Machine machine, BindingResult result) {
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("machine", null);
+		mod.put("tab", "machines");
 		ModelAndView mv = new ModelAndView("NewMachineView", mod);
 		return mv;
 	}
@@ -118,21 +124,26 @@ public class MainController {
 	public ModelAndView newJob(@ModelAttribute("command") Job job, BindingResult result) {
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("job", null);
+		mod.put("tab", "jobs");
 		ModelAndView mv = new ModelAndView("NewJobView", mod);
 		return mv;
 	}
 	
 
 	@RequestMapping(value = "/saveJob", method = RequestMethod.POST)
-	public String addJob(@ModelAttribute("command") Job job, BindingResult result) {
+	public ModelAndView addJob(@ModelAttribute("command") Job job, BindingResult result) {
+		Map<String, Object> mod = new HashMap<String, Object>();
+		mod.put("tab", "jobs");
 		jobService.saveJob(job);
-		return "redirect:/admin";
+		return new ModelAndView("redirect:/admin",mod);
 	}
 
 	@RequestMapping(value = "/saveMachine", method = RequestMethod.POST)
-	public String addMachine(@ModelAttribute("command") Machine machine, BindingResult result) {
+	public ModelAndView addMachine(@ModelAttribute("command") Machine machine, BindingResult result) {
+		Map<String, Object> mod = new HashMap<String, Object>();
+		mod.put("tab", "machines");
 		machineService.add(machine);
-		return "redirect:/admin";
+		return new ModelAndView("redirect:/admin",mod);
 	}
 
 	
@@ -143,6 +154,7 @@ public class MainController {
 		Machine machineToUpdate = machineService.getMachineById(machine.getId());
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("machine", machineToUpdate);
+		mod.put("tab", "machines");
 		return new ModelAndView("NewMachineView", mod);
 	}
 
@@ -155,6 +167,7 @@ public class MainController {
 		Job jobToUpdate = jobService.getJobById(i);
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("job", jobToUpdate);
+		mod.put("tab", "jobs");
 		return new ModelAndView("NewJobView", mod);
 	}
 	
