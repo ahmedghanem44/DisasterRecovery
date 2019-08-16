@@ -11,7 +11,7 @@
 <title></title>
 </head>
 
-<body>
+<body bgcolor="black">
 	<div class="header">
 		<h1 align="center">Disaster Recovery Application</h1>
 		<p align="right">Hello "${uname}" <br><a href="logout.html">Logout</a></p>
@@ -65,14 +65,19 @@
 							<col width="400">
 							<col width="100">
 							<col width="100">
-							<tr class="select" height="40">
+							<tr class="select" height="40" >
+							<div class="up">
 								<th>Job Code</th>
 								<th>Description</th>
 								<th>Hourly Rate</th>
 								<th>Max Hours Per Day</th>
 								<th>Edit</th>
-								<th>Delete</th>
+								<th>Delete</th> </div>
 							</tr>
+							<style type="text/css">
+							.up{
+							color:white;}
+							
 
 							<c:forEach items="${jobs}" var="job">
 								<tr align="center" height="40" bgcolor=#f1f1f1>
