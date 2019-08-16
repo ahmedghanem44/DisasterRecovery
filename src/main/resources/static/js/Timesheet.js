@@ -157,7 +157,7 @@ class Timesheet extends React.Component
 					}).catch(error => {
 						return null;
 					});
-			window.location = "/userhome";
+			
 		}
 	
 		
