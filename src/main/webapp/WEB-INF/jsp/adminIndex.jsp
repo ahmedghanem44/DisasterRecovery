@@ -66,18 +66,14 @@
 							<col width="100">
 							<col width="100">
 							<tr class="select" height="40" >
-							<div class="up">
-								<th>Job Code</th>
+							
+								<th text="white">Job Code</th>
 								<th>Description</th>
 								<th>Hourly Rate</th>
 								<th>Max Hours Per Day</th>
 								<th>Edit</th>
-								<th>Delete</th> </div>
+								<th>Delete</th></div>
 							</tr>
-							<style type="text/css">
-							.up{
-							color:white;}
-							
 
 							<c:forEach items="${jobs}" var="job">
 								<tr align="center" height="40" bgcolor=#f1f1f1>
