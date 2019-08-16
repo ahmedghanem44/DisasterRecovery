@@ -162,7 +162,7 @@
 											<c:when test="${timesheet.isOpen == true}">
 												<a href="timesheetReview/${timesheet.id}">Review</a>
 											</c:when>
-											<c:otherwise><a href="timesheetReview/${timesheet.id}">Finalized</a></c:otherwise>
+											<c:otherwise>Finalized</c:otherwise>
 										</c:choose></td>
 								</tr>
 							</c:forEach>
