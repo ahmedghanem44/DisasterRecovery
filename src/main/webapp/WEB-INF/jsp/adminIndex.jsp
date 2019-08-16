@@ -14,6 +14,7 @@
 <body>
 	<div class="header">
 		<h1 align="center">Disaster Recovery Application</h1>
+		<p align="right">Hello "${uname}" <br><a href="logout.html">Logout</a></p>
 	</div>
 	<div id="root">
 		<div id="top_container"></div>
@@ -48,7 +49,7 @@
 			<div id="contentcontainer">
 
 				<div id="jobs" class="column right tabcontent">
-
+					
 					<h2 class="title">
 						<u> Job Management</u>
 					</h2>

@@ -51,35 +51,30 @@ public class MainController {
 
 		String uname = request.getParameter("username");
 		String pass = request.getParameter("password");
+		String name= userService.getUserByUsername(uname).getName();
 		Map<String, Object> mod = new HashMap<String, Object>();
 
 		if (userService.isAuthorized(uname, pass)) {
 			mod.put("username", uname);
-			session.setAttribute("uname", uname);
+			session.setAttribute("uname", name);
 			if (userService.isAdminByUserName(uname))
-				return new ModelAndView("JobManagementView", mod);
+				return new ModelAndView("redirect:/admin", mod);
 			else
-				return new ModelAndView("TimeSheetAdmin", mod);
+				return new ModelAndView("redirect:/user", mod);
 		} else
-			return new ModelAndView("error1");
+			return new ModelAndView("InvalidLogin");
 	}
+	
+    @RequestMapping(value="/logout.html",method = RequestMethod.GET)
+    public ModelAndView logout(HttpSession session) {
+    	session.removeAttribute("uname");
+    	session.invalidate();
+    	return new ModelAndView("login");
+    } 
 
-	@RequestMapping(value = "/joblist", method = RequestMethod.GET)
-	public ModelAndView getJobList() {
-		Map<String, Object> mod = new HashMap<String, Object>();
-		mod.put("jobs", jobService.getAllJobs());
-		return new ModelAndView("adminIndex", mod);
-	}
-
-	@RequestMapping(value = "/machinelist", method = RequestMethod.GET)
-	public ModelAndView getMachineList() {
-		Map<String, Object> mod = new HashMap<String, Object>();
-		mod.put("machines", machineService.getMachines());
-		return new ModelAndView("MachineManagementView", mod);
-	}
-
-	@RequestMapping(value = "/timesheetlist", method = RequestMethod.GET)
-	public ModelAndView getTimeSheetList() {
+	// Redirecting and Sending data to Admin page
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public ModelAndView getTimeSheetListAdmin() {
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("timesheets", timeService.getTimesheets());
 		mod.put("jobs", jobService.getAllJobs());
@@ -87,40 +82,62 @@ public class MainController {
 		return new ModelAndView("adminIndex", mod);
 	}
 	
+	// Redirecting and Sending data to User page ( should know exactly what the user need )
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public ModelAndView getTimeSheetListUser() {
+		Map<String, Object> mod = new HashMap<String, Object>();
+		mod.put("timesheets", timeService.getTimesheets());
+		mod.put("jobs", jobService.getAllJobs());
+		mod.put("machines", machineService.getMachines());
+		return new ModelAndView("userIndex", mod);
+	}
+	
 	@RequestMapping(value = "/deletejob.html", method = RequestMethod.GET)
 	public ModelAndView deleteJob(@RequestParam("id") Integer id) {
 		jobService.removeJob(id);
-//		return new ModelAndView("redirect:/joblist");
-		return new ModelAndView("redirect:/timesheetlist");
+		return new ModelAndView("redirect:/admin");
 	}
 
 	@RequestMapping(value = "/deletemachine.html", method = RequestMethod.GET)
 	public ModelAndView deleteMachine(@RequestParam("id") Integer id) {
 		machineService.delete(id);
-//		return new ModelAndView("redirect:/machinelist");
-		return new ModelAndView("redirect:/timesheetlist");
+		return new ModelAndView("redirect:/admin");
 	}
-	
-	
-	
 	
 
 	@RequestMapping(value = "/newmachine.html", method = RequestMethod.GET)
 	public ModelAndView newMachine(@ModelAttribute("command") Machine machine, BindingResult result) {
-
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("machine", null);
-//		 mod.put("isUpdate", false);
 		ModelAndView mv = new ModelAndView("NewMachineView", mod);
 		return mv;
+	}
+	
+
+	@RequestMapping(value = "/newjob.html", method = RequestMethod.GET)
+	public ModelAndView newJob(@ModelAttribute("command") Job job, BindingResult result) {
+		Map<String, Object> mod = new HashMap<String, Object>();
+		mod.put("job", null);
+		ModelAndView mv = new ModelAndView("NewJobView", mod);
+		return mv;
+	}
+	
+
+	@RequestMapping(value = "/saveJob", method = RequestMethod.POST)
+	public String addJob(@ModelAttribute("command") Job job, BindingResult result) {
+		jobService.saveJob(job);
+		return "redirect:/admin";
 	}
 
 	@RequestMapping(value = "/saveMachine", method = RequestMethod.POST)
 	public String addMachine(@ModelAttribute("command") Machine machine, BindingResult result) {
 		machineService.add(machine);
-		return "redirect:/machinelist";
+		return "redirect:/admin";
 	}
 
+	
+	
+	
 	@RequestMapping(value = "/editmachine.html", method = RequestMethod.GET)
 	public ModelAndView updateMachine(@ModelAttribute("command") Machine machine, BindingResult result) {
 		Machine machineToUpdate = machineService.getMachineById(machine.getId());
@@ -130,24 +147,11 @@ public class MainController {
 	}
 
 
-	@RequestMapping(value = "/newjob.html", method = RequestMethod.GET)
-	public ModelAndView newJob(@ModelAttribute("command") Job job, BindingResult result) {
-		Map<String, Object> mod = new HashMap<String, Object>();
-		mod.put("job", null);
-		ModelAndView mv = new ModelAndView("NewJobView", mod);
-		return mv;
-	}
 
-	@RequestMapping(value = "/saveJob", method = RequestMethod.POST)
-	public String addJob(@ModelAttribute("command") Job job, BindingResult result) {
-		jobService.saveJob(job);
-		return "redirect:/joblist";
-	}
 
 	@RequestMapping(value = "/editjob.html", method = RequestMethod.GET)
 	public ModelAndView updateJob(@ModelAttribute("command") Job job, BindingResult result,HttpServletRequest req) {
 		int i = Integer.parseInt(req.getParameter("id"));
-//		System.out.println(job.getJobId());
 		Job jobToUpdate = jobService.getJobById(i);
 		Map<String, Object> mod = new HashMap<String, Object>();
 		mod.put("job", jobToUpdate);
@@ -155,18 +159,5 @@ public class MainController {
 	}
 	
 
-//    @RequestMapping(value="/logout",method = RequestMethod.GET)
-//    public String logout(HttpSession session) {
-//    	session.removeAttribute("uname");
-//    	session.invalidate();
-//    	return "redirect:/login.html";
-//    }    
-
-//    
-//    @RequestMapping(value="/approve" , method = RequestMethod.POST)
-//    public String approveTimesheet(@ModelAttribute("command") Timesheet timesheet , BindingResult result) {
-//    	timeService.approveTimeSheet(timesheet.getId());
-//    	return "redirect:/timesheetlist.html";
-//    }
 
 }

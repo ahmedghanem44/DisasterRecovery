@@ -1,31 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<title>Add New Machine</title>
+<link href="css/index.css" rel="stylesheet">
+
+<script type="text/javascript" src="js/tabselector.js"></script>
+
+<title></title>
 </head>
+
 <body>
 	<div class="header">
-		<h2>Disaster Recovery Application : Add New Machine</h2>
+		<h1 align="center">Disaster Recovery Application</h1>
+		<p align="right">Hello "${uname}" <br><a href="logout.html">Logout</a></p>
 	</div>
-	<div class="column left">
-		<h3>
-			<a href="/joblist">Job Management</a>
-		</h3>
-		<h3>
-			<a href="/machinelist">Machine Management</a>
-		</h3>
-		<h3>
-			<a href="/timesheetlist">TimeSheet Management</a>
-		</h3>
-	</div>
+	<div id="root">
+		<div id="top_container"></div>
+		<div id="bottom_container">
 
+			<div id="tabcontainer">
+				<div class="tab">
+					<ul id="tabbar">
+						<li>
+							<a href="admin"><button class="tablinks centerhorizontal" onclick="openTab('jobs')">Job
+								Management</button></a>
+						</li>
+						<br>
+						<br>
+						<br>
+						<li>
+							<a href="admin"><button class="tablinks centerhorizontal" onclick="openTab('machines')">Machine
+								Management</button></a>
+						</li>
+						<br>
+						<br>
+						<br>
+						<li>
+							<a href="admin"><button class="tablinks centerhorizontal"
+								onclick="openTab('timesheet_table')">Timesheet
+								List</button></a>
+						</li>
+					</ul>
+				</div>
+			</div>
 
-	<div class="column right">
+			<div class="column right">
 		<h2 class="title">
 			<u> Add New Machine</u>
 		</h2>
@@ -84,5 +106,15 @@
 		</form:form>
 
 	</div>
+				</div>
+
+			</div>
+		</div>
+	
+	
+<script> 
+	if("${tab}")
+		openTab("${tab}");
+</script>	
 </body>
 </html>
