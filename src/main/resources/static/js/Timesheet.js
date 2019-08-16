@@ -23,7 +23,7 @@ class Timesheet extends React.Component
 			<TimeSheetRow tsr={elem} label1={"Machine Code: "} label2={"Hours Used: "} dd_opts={this.props.machine_opt} />);
 		return(
 			<div style={{padding:"30px", margin:"0px", display:"block"}}>
-				<div style={{marginBot:"10px", display:"inline-block"}}>
+				<div style={{paddingBot:"10px", marginBot:"10px", display:"inline-block"}}>
 					<form style={{height:"30px", float:"left"}} onSubmit={function (e){e.preventDefault();}}>
 						Site Code:
 						<input style={{paddingRight:"5px", marginLeft:"10px", marginRight:"10px"}} type="text" 
@@ -186,7 +186,7 @@ class TimeSheetRow extends React.Component
 		return(
 			<React.Fragment>
 			<li>
-				<div style={{padding:"0px", float:"none"}}>
+				<div style={{padding:"0px", float:"none", margin:"10px"}}>
 					<p style={{float:"left"}}>{label1}</p>
 					<select style={{float:"left", padding:"1px", marginLeft:"10px", marginRight:"10px"}} 
 						onChange={(event) =>{tsr["code"] = event.target.value; 

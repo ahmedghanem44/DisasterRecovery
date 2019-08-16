@@ -4,13 +4,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="css/index.css" rel="stylesheet">
 <script src="https://unpkg.com/react@16/umd/react.development.js"
 	crossorigin></script>
 <script
 	src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
 	crossorigin></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+	<style>
+		html
+{
+	margin: 0;
+	padding: 0;
+}
+body 
+{
+	margin: 0;
+	padding: 0;
+	background-color: #FFFFFF;
+}
+
+p
+{
+	margin: 0;
+	font-family: Calibri;
+	font-weight: 600;
+	font-size: 16px;
+	color: black;
+}
+
+*
+{
+	font-family: Calibri;
+	font-weight: 600;
+	font-size: 20px;
+	color: black;
+} 
+	
+	</style>
 <script>
 	var machine_options_list = new Array();
 	var labor_options_list = new Array();
