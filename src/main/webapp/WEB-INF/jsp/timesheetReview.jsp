@@ -54,7 +54,7 @@
 		</c:forEach>
 	</table>
 	<br>
-      <form id="validate_button" action="timesheetConfirm/${timesheet.id}">
+      <form id="validate_button" action="/DisasterRecovery/timesheetConfirm/${timesheet.id}">
          <button type="submit">Validate</button>
       </form>
       
